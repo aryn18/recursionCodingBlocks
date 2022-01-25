@@ -1,0 +1,991 @@
+All indices problem
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        int[] arr = new int[n];
+        for(int i = 0; i < n; i++) {
+            arr[i] = scn.nextInt();
+        }
+        int m = scn.nextInt();
+        printAllIndicies(arr, m, 0);
+        scn.close();
+    }
+
+    public static void printAllIndicies(int[] arr, int target, int index) {
+        if(index == arr.length) {
+            return;
+        }
+        if(arr[index] == target) {
+            System.out.print(index + " ");
+        }
+
+        printAllIndicies(arr, target, index+1);
+    }
+}
+
+Recursion-Convert String to Integer
+
+import java.util.*;
+public class Main {
+    static int stringToInt(String str)
+	{
+
+		// If the number represented as a string
+		// contains only a single digit
+		// then returns its value
+		if (str.length() == 1)
+			return (str.charAt(0) - '0');
+
+		// Recursive call for the sub-string
+		// starting at the second character
+		double y = stringToInt(str.substring(1));
+
+		// First digit of the number
+		double x = str.charAt(0) - '0';
+
+		// First digit multiplied by the
+		// appropriate power of 10 and then
+		// add the recursive result
+		// For example, xy = ((x * 10) + y)
+		x = x * Math.pow(10, str.length() - 1) + y;
+		return (int)(x);
+	}
+
+    public static void main(String args[]) {
+        // Your Code Here
+        Scanner sc = new Scanner(System.in);
+		String str = sc.nextLine();
+		System.out.print(stringToInt(str));
+
+    }
+}
+
+
+Recursion-Ascii Subsequences
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        // Your Code Here
+		        Scanner scn = new Scanner(System.in);
+        String str = scn.nextLine();
+        int ans = printASCIISubsequence(str, "");
+        System.out.println();
+        System.out.println(ans);
+        scn.close();
+    }
+
+    public static int printASCIISubsequence(String str, String ans) {
+        // base-case
+        if(str.length() == 0) {
+            System.out.print(ans + " ");
+            return 1;
+        }
+
+        int count = 0;
+        char ch = str.charAt(0); // capture the first character
+        // recursive call when first character not included
+        count += printASCIISubsequence(str.substring(1), ans);
+        // recursive call when first character is included
+        count += printASCIISubsequence(str.substring(1), ans + ch);
+        // recursive call when ascii of the first character is included
+        count += printASCIISubsequence(str.substring(1), ans + (int)ch);
+        return count;
+    }
+}
+
+
+
+
+Reverse an array
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+        int[]a = new int[n];
+		
+		for(int i = 0; i < a.length; i++){
+			a[i] = sc.nextInt();
+		}
+		int length=a.length;
+		int[] revArray=reverseArray(a ,0,length-1);
+		for(int i:revArray)
+			System.out.print(i+" ");
+	}
+		public static int[] reverseArray(int[] a,int i,int j){
+		
+		if(i<j){
+			
+			int temp=a[i];
+			a[i]=a[j];
+			a[j]=temp;
+			reverseArray(a, i+1, j-1);
+		}
+		return a;
+	}
+}
+
+
+Generate Parentheses
+
+import java.util.*;
+public class Main
+{
+	
+	static void _printParenthesis(char str[], int pos, int n, int open, int close)
+	{
+		if(close == n)
+		{
+			
+			for(int i=0;i<str.length;i++)
+				System.out.print(str[i]);
+			System.out.println();
+			return;
+		}
+		else
+		{
+			if(open > close) {
+				str[pos] = ')';
+				_printParenthesis(str, pos+1, n, open, close+1);
+			}
+			if(open < n) {
+				str[pos] = '(';
+				_printParenthesis(str, pos+1, n, open+1, close);
+			}
+		}
+	}
+	
+	
+	static void printParenthesis(char str[], int n)
+	{
+		if(n > 0)
+		_printParenthesis(str, 0, n, 0, 0);
+		return;
+	}
+	
+	
+	public static void main (String[] args)
+	{
+		 Scanner sc = new Scanner(System.in);
+		 
+		int n = sc.nextInt();
+		char[] str = new char[2 * n];
+		printParenthesis(str, n);
+	}
+}
+
+
+Is Array Sorted?
+
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        int[] arr = new int[n];
+        for(int i = 0; i < n; i++) arr[i] = scn.nextInt();
+        boolean ans = isArraySorted(arr, 0);
+        System.out.println(ans);
+        scn.close();
+    }
+
+    public static boolean isArraySorted(int[] arr, int index) {
+        if(index+1 == arr.length) {
+            return true;
+        }
+
+        if(arr[index] > arr[index+1]) {
+            return false;
+        }
+
+        return isArraySorted(arr, index+1);
+    }
+}
+
+
+
+Last Index?
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        int[] arr = new int[n];
+        for(int i = 0; i < n; i++) arr[i] = scn.nextInt();
+        int m = scn.nextInt();
+        System.out.println(printLastIndex(arr, m, arr.length-1));
+    }
+
+    public static int printLastIndex(int[] arr, int target, int index) {
+        if(index < 0) {
+            return -1;
+        }
+        
+        if(arr[index] == target) {
+            return index;
+        }
+
+        return printLastIndex(arr, target, index-1);
+    }
+}
+
+
+
+
+
+
+Smart Keypad - I
+
+import java.util.*;
+import java.io.*;
+
+public class Main{
+	public static void main(String[] args) throws Exception{
+		Scanner sc = new Scanner(System.in);
+		String str = sc.next();
+		ArrayList<String> words = getKp(str);
+
+		String srrr[] = new String[words.size()];
+		for(int j =0;j<words.size();j++){  
+              srrr[j] = words.get(j);  
+            } 
+			for(String k: srrr)  
+            {  
+                System.out.println(k);   
+            }  
+		//System.out.println(words.toString());
+	}
+	 static String[] table = { " ", ".+@$", "abc", "def", "ghi", "jkl" , "mno", "pqrs" , "tuv", "wxyz" };
+
+	 public static ArrayList<String> getKp(String str){
+		 if(str.length() == 0){
+			 ArrayList<String> brs = new ArrayList<>();
+			 brs.add("");
+			 return brs;
+		 }
+		 char ch = str.charAt(0);
+		 String res = str.substring(1);
+
+		ArrayList<String> rrs = getKp(res);  
+
+		 ArrayList<String> mrs = new ArrayList<>();
+		  
+		  String code = table[ch - '0'];
+		  for(int i = 0; i < code.length() ; i++){
+			  char chcode = code.charAt(i);
+			  for(String rstr : rrs){
+				  mrs.add(chcode + rstr);
+			  }
+		  }
+		  return mrs;
+	 }
+}
+
+
+
+Maze_path( Count, Print)
+
+
+import java.util.*;
+import java.io.*;
+public class Main {
+    public static void main(String args[]) throws Exception{
+        // Your Code Here
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		 ArrayList<String> path = getMaze(1,1,n,m);
+		 String str[] = new String[path.size()];
+		 for(int j =0;j<path.size();j++){  
+              str[j] = path.get(j);  
+            } 
+			int count =0;
+			for(String k: str)  
+            {  
+                System.out.print(k + " "); 
+				count++;
+			 
+            }  
+			System.out.println();
+			System.out.println(count);
+
+		 //System.out.println(path);
+		     }
+
+	public static ArrayList<String> getMaze(int sr, int sc, int dr, int dc){
+
+		if( sr == dr && sc == dc){
+			ArrayList<String> b = new ArrayList<>();
+			b.add("");
+			return b;
+		}
+		ArrayList<String> hpath =new ArrayList<>();
+		ArrayList<String> vpath =new ArrayList<>();
+		 
+		
+		if (sc < dc){
+			 hpath = getMaze(sr,sc + 1,dr,dc);
+		} 
+		if(sr < dr){
+			 vpath = getMaze(sr+1,sc,dr,dc);
+		}
+		 
+		ArrayList<String> path = new ArrayList<>();
+		for(String vpt : vpath){
+			path.add("V" + vpt);
+		}
+
+		for(String hpt : hpath){
+			path.add("H" + hpt);
+		}
+		
+		return path;
+		
+	}
+	
+	
+}
+
+Mazepath_D2(Count ,Print)
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner scn = new Scanner(System.in);
+		int N = scn.nextInt();
+		
+		ArrayList ans = getmazepath(0, 0, N - 1, N - 1);
+		for (int i = 0; i < ans.size(); i++) {
+			System.out.print(ans.get(i) + " ");
+		}
+		System.out.println();
+		System.out.println(output(0, 0, N - 1, N - 1));
+
+	}
+
+	public static ArrayList<String> getmazepath(int cr, int cc, int er, int ec) {
+		if (cr == er && cc == ec) {
+			ArrayList<String> bRes = new ArrayList<>();
+			bRes.add("");
+			return bRes;
+		}
+		if (cr > er || cc > ec) {
+			ArrayList<String> bRes = new ArrayList<>();
+			return bRes;
+		}
+		ArrayList<String> myres = new ArrayList<>();
+
+		ArrayList<String> resultv = getmazepath(cr + 1, cc, er, ec);
+
+		for (String val : resultv) {
+			myres.add("V" + val);
+		}
+
+		ArrayList<String> resulth = getmazepath(cr, cc + 1, er, ec);
+
+		for (String val : resulth) {
+			myres.add("H" + val);
+		}
+
+		if (cr == cc || cr + cc == er) {
+			ArrayList<String> resultd = getmazepath(cr + 1, cc + 1, er, ec);
+
+			for (String val : resultd) {
+				myres.add("D" + val);
+			}
+
+		}
+
+		return myres;
+
+	}
+
+	public static int output(int cr, int cc, int er, int ec) {
+		int count = 0;
+		if (cr == er && cc == ec) {
+			return 1;
+		}
+		if (cr > er || cc > ec) {
+			return 0;
+		}
+
+		count = count + output(cr + 1, cc, er, ec);
+		count = count + output(cr, cc + 1, er, ec);
+		if (cr == cc || cr+cc == er) {
+			
+			count = count + output(cr + 1, cc + 1, er, ec);
+		}
+
+		return count;
+	}
+}
+
+
+
+Mazepath_D(Count, Print)
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner scn = new Scanner(System.in);
+		int N1 = scn.nextInt();
+		int N2 = scn.nextInt();
+		ArrayList ans = getmazepath(0, 0, N1 - 1, N2 - 1);
+		for (int i = 0; i < ans.size(); i++) {
+			System.out.print(ans.get(i) + " ");
+		} System.out.println();
+		System.out.println(output(0, 0, N1 - 1, N2 - 1));
+		
+
+	}
+
+	public static ArrayList<String> getmazepath(int cr, int cc, int er, int ec) {
+		if (cr == er && cc == ec) {
+			ArrayList<String> bRes = new ArrayList<>();
+			bRes.add("");
+			return bRes;
+		}
+		if (cr > er || cc > ec) {
+			ArrayList<String> bRes = new ArrayList<>();
+			return bRes;
+		}
+		ArrayList<String> myres = new ArrayList<>();
+
+		ArrayList<String> resultv = getmazepath(cr + 1, cc, er, ec);
+
+		for (String val : resultv) {
+			myres.add("V" + val);
+		}
+
+		ArrayList<String> resulth = getmazepath(cr, cc + 1, er, ec);
+
+		for (String val : resulth) {
+			myres.add("H" + val);
+		}
+		
+		ArrayList<String> resultd = getmazepath(cr+1, cc+1, er, ec);
+		
+		for(String val: resultd) {
+			myres.add("D" + val); 
+		}
+
+		return myres;
+
+	}
+
+	public static int output(int cr, int cc, int er, int ec) {
+		int count = 0;
+		if (cr == er && cc == ec) {
+			return 1;
+		}
+		if (cr > er || cc > ec) {
+			return 0;
+		}
+
+		count = count + output(cr + 1, cc, er, ec);
+		count = count + output(cr, cc + 1, er, ec);
+		count = count + output(cr+1, cc+1, er, ec);
+
+		return count;
+	}
+}
+
+
+
+Recursion-Subsequences
+
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        Scanner scn = new Scanner(System.in);
+        String question = scn.nextLine();
+        ArrayList<String> list = new ArrayList<>();
+        int count = printSubsequence(question, "", list);
+        for(int i = list.size()-1; i >= 0; i--) {
+            System.out.print(list.get(i) + " ");
+        }
+        System.out.println();
+        System.out.println(count);
+    }
+
+    public static int printSubsequence(String question, String ans , List<String> list) {
+        if(question.length() == 0) {
+            list.add(ans);
+            return 1;
+        }
+
+        int count = 0;
+        char ch = question.charAt(0); // capture the first character of the string
+        // yes
+        count += printSubsequence(question.substring(1), ans + ch, list); 
+        // no
+        count += printSubsequence(question.substring(1), ans, list);
+        return count;
+    }
+}
+
+
+
+Class Assignment
+
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        Scanner scn = new Scanner(System.in);
+        int t = scn.nextInt();
+        int i = 1;
+        while(t-->0) {
+            int n = scn.nextInt();
+            System.out.println("#" + i + " : " + solve("", n, false));
+            i++;
+        }
+        scn.close();
+    }
+
+    public static int solve(String ans, int n, boolean isPreviousCallOfb) {
+        // +ve base-case
+        if(ans.length() == n) {
+            return 1;
+        }
+
+        // -ve base-case
+        if(ans.length() > n) {
+            return 0;
+        }
+
+        int count = 0;
+        // call for a
+        count += solve(ans+'a', n, false);
+        // call for b
+        if(!isPreviousCallOfb) {
+            count += solve(ans+'b', n, true);
+        }
+        return count;
+    }
+}
+
+
+
+
+Recursion-Keypad Codes
+
+
+
+import java.util.*;
+import java.io.*;
+
+public class Main{
+	public static void main(String[] args) throws Exception{
+		Scanner sc = new Scanner(System.in);
+		String str = sc.next();
+		ArrayList<String> words = getKp(str);
+
+		String srrr[] = new String[words.size()];
+		for(int j =0;j<words.size();j++){  
+              srrr[j] = words.get(j);  
+            } 
+			int count = 0;
+			for(String k: srrr)  
+            {  
+                System.out.print(k + " "); 
+				count++;  
+            }  
+			System.out.println();
+			System.out.println(count);
+		//System.out.println(words.toString());
+	}
+static String[] table = { " ",  "abc", "def", "ghi", "jkl" , "mno", "pqrs" , "tuv", "wxyz" };
+public static ArrayList<String> getKp(String str){
+		 if(str.length() == 0){
+			 ArrayList<String> brs = new ArrayList<>();
+			 brs.add("");
+			 return brs;
+		 }
+		 char ch = str.charAt(0);
+		 String res = str.substring(1);
+
+		ArrayList<String> rrs = getKp(res);  
+
+		 ArrayList<String> mrs = new ArrayList<>();
+		  
+		  String code = table[ch - '0'];
+		  for(int i = 0; i < code.length() ; i++){
+			  char chcode = code.charAt(i);
+			  for(String rstr : rrs){
+				  mrs.add(chcode + rstr);
+			  }
+		  }
+		  return mrs;
+	 }
+}
+
+
+
+
+Rat Chases its cheese
+
+
+#include<iostream>
+using namespace std;
+bool ratInMaze(char maze[10][10],int soln[10][10],int i,int j,int n,int m){
+     if(i>n||j>m||i<0||j<0 || soln[i][j]){
+        return false;
+    }
+    if(maze[i][j]=='X'){
+        return false;
+    }
+
+    if(i==n&&j==m){
+        soln[n][m]=1;
+
+    for(int i=0;i<=n;i++){
+        for(int j=0;j<=m;j++){
+            cout<<soln[i][j]<<" ";
+        }
+        cout<<endl;
+    }        
+
+        return true;
+    }
+    
+   
+    
+    bool right=false,down=false,up=false,left=false;
+    soln[i][j] = 1;
+    
+    if(i+1<=n && soln[i+1][j]==0){
+        down = ratInMaze(maze,soln,i+1,j,n,m);
+    }
+    //Modiificatons:
+    if(j+1<=m && soln[i][j+1]==0 && !down){
+        right = ratInMaze(maze,soln,i,j+1,n,m);
+    }
+    if(i-1>=0 && soln[i-1][j]==0 && !down && !right){
+        up = ratInMaze(maze,soln,i-1,j,n,m);
+    }
+    if(j-1>=0 && soln[i][j-1]==0 && !down && !right && !up){
+        left = ratInMaze(maze,soln,i,j-1,n,m);
+    }
+
+    if(right||down||left||up){
+        return true;
+    }
+    //Modification:
+    soln[i][j] = 0;
+    
+    return false;
+}
+int main() {
+    int n,m;
+    cin>>n>>m;
+    char maze[10][10];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>maze[i][j];
+        }
+    }
+    int soln[10][10]={0};
+    
+    bool ans = ratInMaze(maze,soln,0,0,n-1,m-1);
+    
+    if(ans==false){
+        cout<<"NO PATH FOUND";
+    }
+    
+	return 0;
+}
+
+
+
+Replace all π
+
+import java.util.*;
+public class Main {
+
+	public static void convert(String inp,String con){
+		if(inp.length()==0){
+			System.out.println(con);
+			return;
+		}
+		char cc0th;
+		char cc1th=' ';
+		if(inp.length()>=2){
+			 cc0th=inp.charAt(0);
+			 cc1th=inp.charAt(1);
+		}
+		cc0th=inp.charAt(0);
+		if(cc0th=='p' && cc1th=='i'){
+			convert(inp.substring(2),con+"3.14");
+		}
+		else{
+			convert(inp.substring(1),con+cc0th);
+		}
+	}
+
+    public static void main(String args[]) {
+		Scanner sc= new Scanner(System.in);
+		int n=sc.nextInt();
+		for(int i=0;i<=n;i++){
+			String str=sc.nextLine();
+			convert(str,"");
+		}
+    }
+}
+
+
+
+Move All X at End
+
+import java.util.*;
+public class Main {
+	static int x=0;
+	public static void move(String inp,String con){
+		if(inp.length()==0){
+			while(x>0){
+				con+='x';
+				x--;
+			}
+			System.out.println(con);
+			return;
+		}
+		char cc0th=inp.charAt(0);
+		if(cc0th=='x'){
+			x++;
+			move(inp.substring(1),con);
+		}
+		else
+			move(inp.substring(1),con+cc0th);
+	}
+
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner sc= new Scanner(System.in);
+		String str=sc.nextLine();
+		move(str,"");
+    }
+}
+
+
+
+COUNT N-QUEEN
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int board[][] = new int[n][n];
+		queenCombo(board,0,n);
+		System.out.println(count);
+
+    }
+	static int count;
+	public static boolean isItSafeToPlaceQueen(int[][]board,int cr,int cc,int n){
+		for(int row=0;row<=cr-1;row++){
+			if(board[row][cc]==1){
+				return false;
+			}
+		}
+		int row=cr;
+		int col=cc;
+		while(row>=0 && col<n){
+			if(board[row][col]==1){
+				return false;
+			}
+			row--;
+			col++;
+		}
+		row=cr;
+		col=cc;
+		while(row>=0 && col>=0){
+			if(board[row][col]==1){
+				return false;
+			}
+			row--;
+			col--;
+		}
+		return true;
+	}
+	public static void queenCombo(int[][] board, int cr, int n){
+		if(cr==n){
+			count++;
+			return;
+		}
+		for(int cc=0; cc < n; cc++){
+			if(isItSafeToPlaceQueen(board,cr,cc,n)){
+				board[cr][cc]=1;
+				queenCombo(board,cr+1,n);
+				board[cr][cc]=0;
+			}
+
+		}
+	}
+}
+
+
+Recursion-Tower of Hanoi
+
+import java.util.*;
+public class Main {
+    static int count =0;
+    
+    
+    public static void towerOfHanoi(int n, String from, String to, String aux){
+        if(n==1){
+
+            System.out.println("Move 1th disc from "+from+" to "+to);
+            count++;
+            return;
+        }
+        towerOfHanoi(n-1,from,aux,to);
+        System.out.println("Move "+n+"th disc from "+from+" to "+to);
+        count++;
+        towerOfHanoi(n-1,aux,to,from);
+        
+    }
+    
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        towerOfHanoi(n, "T1", "T2", "T3");
+        System.out.println(count);
+        
+    
+        
+        // Your Code Here
+    }
+
+}
+
+
+
+Funky Chess Board
+
+#include<bits/stdc++.h>
+using namespace std;
+int n,board[11][11],sum=0,pathfind;
+void funky_chess(int i,int j,int count){
+	if(i<0 ||i>10 || j<0 || j>10 || board[i][j]==0){
+		return;
+	}
+	board[i][j]=0;
+    pathfind=max(pathfind,count+1);
+    funky_chess(i-2,j+1,count+1);
+	funky_chess(i-2,j-1,count+1);
+	funky_chess(i-1,j-2,count+1);
+	funky_chess(i-1,j+2,count+1);
+	funky_chess(i+1,j-2,count+1);
+	funky_chess(i+1,j+2,count+1);
+	funky_chess(i+2,j-1,count+1);
+	funky_chess(i+2,j+1,count+1);
+	board[i][j]=1;
+}
+int main() {
+	cin>>n;
+	for(int i=0;i<n;i++){
+		 for(int j=0;j<n;j++){
+			 cin>>board[i][j];
+			 if(board[i][j]){
+				 sum++;
+			 }
+		 }
+
+	}
+	pathfind=0;
+	funky_chess(0,0,0);
+	cout<<sum-pathfind<<endl;
+
+	return 0;
+}
+
+
+
+Dictionary Order(Larger)
+
+import java.util.*;
+public class Main {
+
+	private static ArrayList<String> permPerm(String inp,String out,String ext,ArrayList<String> al){
+		if(inp.length()==0){
+			int result = out.compareTo(ext);
+			if(result>0){
+				al.add(out);
+			}
+		return al;
+		}
+
+		for(int i=0;i<inp.length();i++){
+			char cith = inp.charAt(i);
+			permPerm(inp.substring(0,i)+inp.substring(i+1),out+cith,ext,al);
+		}
+		return al;
+	}
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner scn = new Scanner(System.in);
+		String s = scn.next();
+		String str = s;
+		ArrayList<String> al = new ArrayList<String>();
+		permPerm(s,"",str,al);
+		Collections.sort(al);
+		for(String st: al){
+			System.out.println(st);
+		}
+    }
+}
+
+
+
+Dictionary Order(Smaller)
+
+
+import java.util.*;
+public class Main {
+
+	private static ArrayList<String> permPerm(String inp,String out,String ext,ArrayList<String> al){
+		if(inp.length()==0){
+			int result = out.compareTo(ext);
+			if(result<0){
+				al.add(out);
+			}
+		return al;
+		}
+
+		for(int i=0;i<inp.length();i++){
+			char cith = inp.charAt(i);
+			permPerm(inp.substring(0,i)+inp.substring(i+1),out+cith,ext,al);
+		}
+		return al;
+	}
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner scn = new Scanner(System.in);
+		String s = scn.next();
+		String str = s;
+		ArrayList<String> al = new ArrayList<String>();
+		permPerm(s,"",str,al);
+		Collections.sort(al);
+		for(String st: al){
+			System.out.println(st);
+		}
+    }
+}
